@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: teleport
+  namespace: teleport
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: teleport
+  template:
+    metadata:
+      labels:
+        app: teleport
+    spec:
+      containers:
+      - name: teleport
+        image: quay.io/gravitational/teleport:13.3.1
+        ports:
+        - containerPort: 3025
+        - containerPort: 3080
+        volumeMounts:
+        - name: teleport-config
+          mountPath: /etc/teleport
+      volumes:
+      - name: teleport-config
+        configMap:
+          name: teleport-config
