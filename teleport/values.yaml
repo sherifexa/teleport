@@ -1,0 +1,21 @@
+teleport:
+  config:
+    version: v2
+    teleport:
+      nodename: teleport
+      log:
+        output: stderr
+        severity: INFO
+      storage:
+        type: dir
+    auth_service:
+      enabled: true
+      cluster_name: "my-cluster.example.com"
+      listen_addr: "0.0.0.0:3025"
+    proxy_service:
+      enabled: true
+      listen_addr: "0.0.0.0:3080"
+      public_addr: "teleport.example.com:443"
+      acme: true
+    ssh_service:
+      enabled: false
